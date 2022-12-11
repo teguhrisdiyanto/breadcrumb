@@ -1,4 +1,4 @@
-module github.com/teguhrisdiyanto/crud-rpc
+module github.com/teguhrisdiyanto/breadcrumb
 
 go 1.18
 
