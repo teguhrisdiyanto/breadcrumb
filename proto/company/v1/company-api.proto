@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+import "proto/company/v1/company.proto";
+//import "company.proto";
+
+
+// Creates an item in the database
+
+
+package proto.company.v1;
+
+
+
+option go_package = "generate/go/company/v1;companyv1";
+
+
+service CrudApi {
+
+    rpc ReadItem (ID) returns (Employee);
+}
