@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.5
-// source: proto/address/v1/address_api.proto
+// source: proto/address/v1/address.proto
 
 package addressv1
 
@@ -32,8 +32,6 @@ type AddressAPIClient interface {
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
 	// Update update address.
 	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
-	// PartialUpdate talent job.
-	PartialUpdate(ctx context.Context, in *PartialUpdateRequest, opts ...grpc.CallOption) (*PartialUpdateResponse, error)
 	// Delete address by id.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 }
@@ -91,15 +89,6 @@ func (c *addressAPIClient) Update(ctx context.Context, in *UpdateRequest, opts .
 	return out, nil
 }
 
-func (c *addressAPIClient) PartialUpdate(ctx context.Context, in *PartialUpdateRequest, opts ...grpc.CallOption) (*PartialUpdateResponse, error) {
-	out := new(PartialUpdateResponse)
-	err := c.cc.Invoke(ctx, "/proto.address.v1.AddressAPI/PartialUpdate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *addressAPIClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
 	out := new(DeleteResponse)
 	err := c.cc.Invoke(ctx, "/proto.address.v1.AddressAPI/Delete", in, out, opts...)
@@ -123,8 +112,6 @@ type AddressAPIServer interface {
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
 	// Update update address.
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
-	// PartialUpdate talent job.
-	PartialUpdate(context.Context, *PartialUpdateRequest) (*PartialUpdateResponse, error)
 	// Delete address by id.
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 	mustEmbedUnimplementedAddressAPIServer()
@@ -148,9 +135,6 @@ func (UnimplementedAddressAPIServer) Create(context.Context, *CreateRequest) (*C
 }
 func (UnimplementedAddressAPIServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (UnimplementedAddressAPIServer) PartialUpdate(context.Context, *PartialUpdateRequest) (*PartialUpdateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PartialUpdate not implemented")
 }
 func (UnimplementedAddressAPIServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -258,24 +242,6 @@ func _AddressAPI_Update_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AddressAPI_PartialUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PartialUpdateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AddressAPIServer).PartialUpdate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/proto.address.v1.AddressAPI/PartialUpdate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AddressAPIServer).PartialUpdate(ctx, req.(*PartialUpdateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AddressAPI_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRequest)
 	if err := dec(in); err != nil {
@@ -322,14 +288,10 @@ var AddressAPI_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AddressAPI_Update_Handler,
 		},
 		{
-			MethodName: "PartialUpdate",
-			Handler:    _AddressAPI_PartialUpdate_Handler,
-		},
-		{
 			MethodName: "Delete",
 			Handler:    _AddressAPI_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/address/v1/address_api.proto",
+	Metadata: "proto/address/v1/address.proto",
 }
