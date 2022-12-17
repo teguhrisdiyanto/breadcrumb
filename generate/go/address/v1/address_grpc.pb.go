@@ -99,7 +99,7 @@ func (c *addressAPIClient) Delete(ctx context.Context, in *DeleteRequest, opts .
 }
 
 // AddressAPIServer is the server API for AddressAPI service.
-// All implementations must embed UnimplementedAddressAPIServer
+// All implementations should embed UnimplementedAddressAPIServer
 // for forward compatibility
 type AddressAPIServer interface {
 	// ByID get address by id.
@@ -116,7 +116,7 @@ type AddressAPIServer interface {
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 }
 
-// UnimplementedAddressAPIServer must be embedded to have forward compatible implementations.
+// UnimplementedAddressAPIServer should be embedded to have forward compatible implementations.
 type UnimplementedAddressAPIServer struct {
 }
 
@@ -138,7 +138,6 @@ func (UnimplementedAddressAPIServer) Update(context.Context, *UpdateRequest) (*U
 func (UnimplementedAddressAPIServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedAddressAPIServer) mustEmbedUnimplementedAddressAPIServer() {}
 
 // UnsafeAddressAPIServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to AddressAPIServer will
