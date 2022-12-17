@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.5
-// source: proto/address/v1/address.proto
+// source: proto/address/v1/address_api.proto
 
 package addressv1
 
@@ -291,5 +291,5 @@ var AddressAPI_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/address/v1/address.proto",
+	Metadata: "proto/address/v1/address_api.proto",
 }

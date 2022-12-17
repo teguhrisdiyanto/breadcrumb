@@ -32,3 +32,8 @@ clean:
 
 
 # protoc --go_out=. --go-grpc_out=. proto/address/v1/*.proto
+
+
+protoc --go_out=. --go-grpc_out=require_unimplemented_servers=false:. proto/address/v1/address.proto
+
+#./*.proto
