@@ -9,7 +9,6 @@ option java_outer_classname = "AddressProto";
 option java_package = "com.generate.go.address.v1";
 option objc_class_prefix = "TAX";
 option php_namespace = "generate\\go\\Address\\V1";
-import "google/protobuf/struct.proto";
 
 // Address address response message represent entity address.
 message Address {
@@ -30,26 +29,3 @@ message Address {
   string google_map_url = 15;
 }
 
-
-message RequestFilter {
-  int32 page = 1;
-  int32 limit = 2;
-  string sort = 3;
-  string order_by = 4;
-  string search_field = 5;
-  string search_value = 6;
-  google.protobuf.Struct where = 7;
-  map<string, google.protobuf.ListValue> where_in = 8;
-  WhereCondition where_condition = 9;
-  map<string, google.protobuf.ListValue> where_not_in = 10;
-  google.protobuf.Struct where_not_equal = 11;
-  map<string, google.protobuf.ListValue> between = 12;
-}
-
-// WhereCondition define query WHERE Condition in gorm.
-enum WhereCondition {
-  WHERE_CONDITION_INVALID = 0;
-  WHERE_CONDITION_AND = 1;
-  WHERE_CONDITION_OR = 2;
-  WHERE_CONDITION_NOT = 3;
-}
