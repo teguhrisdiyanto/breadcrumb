@@ -114,7 +114,6 @@ type AddressAPIServer interface {
 	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
 	// Delete address by id.
 	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
-	mustEmbedUnimplementedAddressAPIServer()
 }
 
 // UnimplementedAddressAPIServer must be embedded to have forward compatible implementations.
