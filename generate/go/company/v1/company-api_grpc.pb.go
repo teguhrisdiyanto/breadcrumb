@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CrudApiClient interface {
 	ReadItem(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Employee, error)
+	ReadItem3(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Employee, error)
 }
 
 type crudApiClient struct {
@@ -42,11 +43,21 @@ func (c *crudApiClient) ReadItem(ctx context.Context, in *ID, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *crudApiClient) ReadItem3(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Employee, error) {
+	out := new(Employee)
+	err := c.cc.Invoke(ctx, "/proto.company.v1.CrudApi/ReadItem3", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CrudApiServer is the server API for CrudApi service.
 // All implementations should embed UnimplementedCrudApiServer
 // for forward compatibility
 type CrudApiServer interface {
 	ReadItem(context.Context, *ID) (*Employee, error)
+	ReadItem3(context.Context, *ID) (*Employee, error)
 }
 
 // UnimplementedCrudApiServer should be embedded to have forward compatible implementations.
@@ -55,6 +66,9 @@ type UnimplementedCrudApiServer struct {
 
 func (UnimplementedCrudApiServer) ReadItem(context.Context, *ID) (*Employee, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadItem not implemented")
+}
+func (UnimplementedCrudApiServer) ReadItem3(context.Context, *ID) (*Employee, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadItem3 not implemented")
 }
 
 // UnsafeCrudApiServer may be embedded to opt out of forward compatibility for this service.
@@ -86,6 +100,24 @@ func _CrudApi_ReadItem_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CrudApi_ReadItem3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CrudApiServer).ReadItem3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.company.v1.CrudApi/ReadItem3",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CrudApiServer).ReadItem3(ctx, req.(*ID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CrudApi_ServiceDesc is the grpc.ServiceDesc for CrudApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -96,6 +128,10 @@ var CrudApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadItem",
 			Handler:    _CrudApi_ReadItem_Handler,
+		},
+		{
+			MethodName: "ReadItem3",
+			Handler:    _CrudApi_ReadItem3_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

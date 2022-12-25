@@ -17,4 +17,5 @@ import "proto/company/v1/company.proto";
 service CrudApi {
 
     rpc ReadItem (ID) returns (Employee);
+    rpc ReadItem3 (ID) returns (Employee);
 }
