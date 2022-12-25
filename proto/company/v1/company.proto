@@ -2,10 +2,13 @@ syntax = "proto3";
 
 package proto.company.v1;
 
-
-
+option csharp_namespace = "generate.go.company.V1";
 option go_package = "generate/go/company/v1;companyv1";
-
+option java_multiple_files = true;
+option java_outer_classname = "CompanyProto";
+option java_package = "com.generate.go.company.v1";
+option objc_class_prefix = "TAX";
+option php_namespace = "generate\\go\\company\\V1";
 
 message Employee {
   string name = 1;
