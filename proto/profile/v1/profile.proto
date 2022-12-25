@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package proto.profile.v1;
+
+option csharp_namespace = "Generate.go.Profile.V1";
+option go_package = "generate/go/profile/v1;profilev1";
+option java_multiple_files = true;
+option java_outer_classname = "ProfileProto";
+option java_package = "com.generate.go.profile.v1";
+option objc_class_prefix = "TPX";
+option php_namespace = "generate\\go\\Profile\\V1";
+
+// Profile profile message represent entity job in talent.
+message Profile {
+  uint64 id = 1;
+  uint64 id_user = 2;
+  string full_name = 3;
+  string description = 4;
+  string headline = 5;
+  string current_domicile = 6;
+  repeated string list_of_skills = 7;
+  sfixed64 created_at = 8;
+  sfixed64 updated_at = 9;
+  sfixed64 deleted_at = 10;
+}

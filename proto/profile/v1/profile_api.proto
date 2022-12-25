@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package proto.profile.v1;
+
+option csharp_namespace = "Generate.go.Profile.V1";
+option go_package = "generate/go/profile/v1;profilev1";
+option java_multiple_files = true;
+option java_outer_classname = "ProfileApiProto";
+option java_package = "com.generate.go.profile.v1";
+option objc_class_prefix = "TPX";
+option php_namespace = "generate\\go\\Profile\\V1";
+
+import "proto/profile/v1/profile.proto";
+
+// ProfileAPI is a service to communication with talent module profile.
+service ProfileAPI {
+  // Create profile rpc service.
+  rpc Create(CreateRequest) returns (CreateResponse);
+  // Update profile rpc service.
+  rpc Update(UpdateRequest) returns (UpdateResponse);
+  // ByID get profile by id rpc service.
+  rpc ByID(ByIDRequest) returns (ByIDResponse);
+  // ByIDUser get profile by id rpc service.
+  rpc ByIDUser(ByIDUserRequest) returns (ByIDUserResponse);
+}
+
+message CreateRequest {
+  uint64 id_user = 1;
+  string full_name = 2;
+  string description = 3;
+  string headline = 4;
+  string current_domicile = 5;
+  repeated string list_of_skills = 6;
+}
+
+message CreateResponse {
+  Profile profile = 1;
+}
+
+message UpdateRequest {
+  uint64 id = 1;
+  uint64 id_user = 2;
+  string full_name = 3;
+  string description = 4;
+  string headline = 5;
+  string current_domicile = 6;
+  repeated string list_of_skills = 7;
+}
+
+message UpdateResponse {
+  Profile profile = 1;
+}
+
+message ByIDRequest {
+  uint64 id = 1;
+}
+
+message ByIDResponse {
+  Profile profile = 1;
+}
+
+message ByIDUserRequest {
+  uint64 id = 1;
+}
+
+message ByIDUserResponse {
+  Profile profile = 1;
+}
